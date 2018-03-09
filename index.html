@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch-theme-algolia.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0"></script>
+    <title>InstantSearch.js</title>
+  </head>
+  <body>
+
+    <div id="search-box" placeholder="Search for products" ></div>
+    <div id="hits"></div>
+
+    <script>
+        const search = instantsearch({
+          appId: 'latency',
+          apiKey: '6be0576ff61c053d5f9a3225e2a90f76',
+          indexName: 'instant_search',
+          urlSync: true
+        });
+
+        search.addWidget(
+          instantsearch.widgets.searchBox({
+            container: '#search-box',
+            placeholder: 'Search for products'
+          })
+        );
+
+        search.addWidget(
+          instantsearch.widgets.hits({
+            container: '#hits',
+            hitsPerPage: 10,
+            templates: {
+              empty: 'No results',
+              item: '<img src="{{image}}"> {{{_highlightResult.name.value}}}: ${{price}} <div>{{description}}</div>'
+            }
+          })
+        );
+      
+        search.start();
+    </script>
+    
+  </body>
+</html>
